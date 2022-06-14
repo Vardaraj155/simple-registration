@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Report</title>
+</head>
+<style>
+    #customers {
+      font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+      border-collapse: collapse;
+      width: 100%;
+    }
+    
+    #customers td, #customers th {
+      border: 1px solid #ddd;
+      padding: 8px;
+    }
+    
+    #customers tr:nth-child(even){background-color: #f2f2f2;}
+    
+    #customers tr:hover {background-color: #ddd;}
+    
+    #customers th {
+      padding-top: 12px;
+      padding-bottom: 12px;
+      text-align: left;
+      background-color: #4CAF50;
+      color: white;
+    }
+    </style>
+<body>
+  <h3>Report of registered Candidates</h3>
+  <p>
+  {% if request.user.is_authenticated %}
+        {{request.user.username}} ,<a href="{% url 'logout' %}">Logout</a>
+    
+  {% endif %}
+    </p>
+    
+  <h2 style="color: chocolate;" style="font-family: fantasy;">
+    <a href="{% url 'register' %}">Need to Register</a></h2>
+    
+    <table id="customers">
+        <tr>
+          <th>Name</th>
+          <th>Department</th>
+          <th>Date Joined</th>
+          <th>Email</th>  
+        </tr>
+        <tr>
+          {% for field in details %}
+            {% if field.Department != "" %}
+              <td>{{field.username}}</td>
+              <td>{{field.Department}}</td>
+              <td>{{field.datejoined}}</td>
+              <td>{{field.Email}}</td>
+            {% endif %}
+        </tr>
+        {% endfor %}
+      </table><br>
+      <h2 style="color: chocolate;" style="font-family: fantasy;">
+        <a href="{% url 'admin:index' %}">Admin Login</a></h2>
+        
+    
+</body>
+</html>

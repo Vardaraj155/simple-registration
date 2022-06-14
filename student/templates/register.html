@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>Register</h2>
+    <form action="" method="post">
+        {% csrf_token %}
+        {% for fields in registration %}
+                
+                <td>{{fields.label_tag}}</td><br> 
+                {{fields}} </td> <br>
+                {% if fields.help_text %} 
+                <small>{{fields.help_text}}</small></td> <br>   
+                {% endif %}  
+                
+                {%  for error in fields.errors %}
+                <small style="color: red;">{{error}}</small></td>  <br> 
+                {% endfor %}              
+        {% endfor %}
+        <button type="submit">Register</button>
+    </form>
+</body>
+</html>
